@@ -38,7 +38,7 @@ export const candidateRouter = new Hono<{
 
   candidateRouter.post('/', async (c) => {
     const body = await c.req.json();
-    const { name = '', experience = '', skills = '', location = '',  username = '' } = body;
+    const { name = '', experience = '', skills = '', location = '',  username = '', status = '', title = '' } = body;
 
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
@@ -57,7 +57,9 @@ export const candidateRouter = new Hono<{
                 username,
                 skills,
                 experience,
-                location
+                location,
+                status,
+                title
             }
         });
         return c.json({
@@ -96,7 +98,7 @@ export const candidateRouter = new Hono<{
   
   candidateRouter.put('/', async (c) => {
     const body = await c.req.json();
-    const { id, name = '', experience = '', skills = '', location = '',  username = '' } = body;
+    const { id, name = '', experience = '', skills = '', location = '',  username = '', status = '', title = '' } = body;
 
     const prisma = new PrismaClient({
       datasourceUrl: c.env.DATABASE_URL,
@@ -107,7 +109,7 @@ export const candidateRouter = new Hono<{
             id: id
         },
         data: {
-            name, experience, skills, location, username
+            name, experience, skills, location, username, status, title
         }});
     return c.json({
         id: candidate.id

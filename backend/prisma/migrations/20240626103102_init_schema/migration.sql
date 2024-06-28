@@ -6,6 +6,8 @@ CREATE TABLE "Candidate" (
     "skills" TEXT NOT NULL,
     "experience" TEXT NOT NULL,
     "location" TEXT,
+    "status" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
 
     CONSTRAINT "Candidate_pkey" PRIMARY KEY ("id")
 );

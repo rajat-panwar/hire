@@ -20,6 +20,8 @@ model Candidate {
   skills  String
   experience String
   location String?
+  status String
+  title String
 }
 
 model User {

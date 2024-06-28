@@ -16,7 +16,9 @@ export const createCandidate = z.object({
     skills: z.string(),
     location: z.string(),
     experience: z.string(),
-    username: z.string().email()
+    username: z.string().email(),
+    title: z.string(),
+    status: z.string()
 });
 
 export const updateCandidate = z.object({
@@ -24,7 +26,9 @@ export const updateCandidate = z.object({
     skills: z.string(),
     location: z.string(),
     experience: z.string(),
-    username: z.string().email()
+    username: z.string().email(),
+    title: z.string(),
+    status: z.string()
 });
 
 export type CreateCandidate = z.infer<typeof createCandidate>

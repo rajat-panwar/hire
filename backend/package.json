@@ -7,7 +7,7 @@
   "dependencies": {
     "@prisma/client": "^5.16.0",
     "@prisma/extension-accelerate": "^1.1.0",
-    "@rajat-panwar/hire-common": "^1.0.1",
+    "@rajat-panwar/hire-common": "^1.0.2",
     "hono": "^4.4.8",
     "prisma": "^5.16.0"
   },
