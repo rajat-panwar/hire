@@ -57,7 +57,7 @@ export function Candidates() {
                 originalList[io] = newValue;
                 completeCandidatesList.current = originalList;
             } else {
-                completeCandidatesList = [...originalList, newValue];
+                completeCandidatesList.current = [...originalList, newValue];
             }
 
             setCandidates(candidates => {

@@ -86,7 +86,7 @@ export const AddCandidate = (props: any) => {
     async function editRequest () {
         setLoader(true);
         try {
-            const response = await axios.put(`${BACKEND_URL}/api/v1/candidates`, {...inputs, id}, {
+            await axios.put(`${BACKEND_URL}/api/v1/candidates`, {...inputs, id}, {
                 headers: {
                     Authorization: localStorage.getItem("token")
                 }
