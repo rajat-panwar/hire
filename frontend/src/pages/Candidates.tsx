@@ -9,18 +9,24 @@ import { useEffect, useState, ChangeEvent, useRef } from "react"
 import axios from "axios"
 import { BACKEND_URL } from "@/config"
 import { Skeleton } from "@/components/ui/skeleton"
+import { useNavigate } from "react-router-dom"
 
 export function Candidates() {
+    const navigate =  useNavigate();
     const completeCandidatesList = useRef(null);
     const [candidates, setCandidates] = useState([]);
     const [loader, setLoader] = useState(false);
 
     async function getCandidates() {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            navigate("/signin")
+        }
         setLoader(true);
         try {
             const response = await axios.get(`${BACKEND_URL}/api/v1/candidates`, {
                 headers: {
-                    Authorization: localStorage.getItem("token")
+                    Authorization: token
                 }
             });
             completeCandidatesList.current = response.data
