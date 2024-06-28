@@ -5,22 +5,33 @@ import { BACKEND_URL } from "../../config"
 import axios from "axios"
 import { useState } from "react"
 import { SigninInput } from "@rajat-panwar/hire-common"
+import { useToast } from "./use-toast"
+import { Loader2 } from "lucide-react"
 
 export const AuthSignin = () => {
+    const { toast } = useToast();
     const navigate =  useNavigate();
     const [postInputs, setPostInputs] = useState<SigninInput>({
         username: "",
         password: ""
     })
+    const [loader, setLoader] = useState(false);
 
     async function sendRequest () {
+        setLoader(true);
         try {
             const response = await axios.post(`${BACKEND_URL}/api/v1/user/signin`, postInputs);
             const jwt = response.data;
             localStorage.setItem("token", jwt);
             navigate("/candidates");
         } catch (e) {
-
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: "Please check you username and password!", 
+            })
+        } finally {
+            setLoader(false);
         }
     }
     return (
@@ -50,7 +61,10 @@ export const AuthSignin = () => {
                         setPostInputs(c => ({...c, password: e.target.value}))
                     }}/>
                 </div>
-                <Button className="w-full bg-black text-white" onClick={sendRequest}>Login</Button>
+                <Button className="w-full bg-black text-white" onClick={sendRequest} disabled={loader}>
+                    {loader && <Loader2 className="mr-2 h-4 w-4 animate-spin"/>}
+                    Login
+                </Button>
                 </div>
             </div>
     </div>
